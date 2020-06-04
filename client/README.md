@@ -1,1 +1,6 @@
-BLOG CLIENT
+# CLIENT
+
+### features
+
+- light/dark theme
+- global css variables
