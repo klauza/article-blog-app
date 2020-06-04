@@ -1,4 +1,7 @@
+import { device } from '../device';
+
 export default {
+  device,
   title: 'dark',
 
   colors: {
@@ -7,7 +10,7 @@ export default {
 
     background: '#000',
     text: '#fff'
-  },
+  }
 
 
 }

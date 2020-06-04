@@ -17,7 +17,6 @@ import GlobalStyle from './styles/global';
 import Main from './views'
 
 function App() {
-
   const [theme, setTheme] = usePersistedState('theme', light);
 
   const toggleTheme = () => {

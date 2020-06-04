@@ -15,9 +15,15 @@ export default createGlobalStyle`
   }
   
   .container{
-    width: 100%;
-    max-width: 1280px;
     margin: 0 auto;
 
+    @media ${props => props.theme.device.laptop} {
+      max-width: 800px;
+    }
+  
+    @media ${props => props.theme.device.laptopL} {
+      max-width: 1400px;
+    }
   }
+
 `;
