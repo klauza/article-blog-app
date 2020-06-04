@@ -23,13 +23,13 @@ const Footer = React.lazy(() =>
 );
 
 
-const Main = () => {
+const Main = ( { toggleTheme }) => {
   return (
     <Suspense fallback={<h1>LOADING</h1>}>
 
       <Router history={history}>
 
-        <Navigation />
+        <Navigation toggleTheme={toggleTheme} />
 
         <div className="views-container">
           <Switch>
