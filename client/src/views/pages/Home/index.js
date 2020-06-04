@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { Wrapper } from './HomeCSS';
 
 const Home = () => {
   return (
-    <div>
+    <Wrapper>
       home page
-    </div>
+    </Wrapper>
   )
 }
 

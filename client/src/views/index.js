@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import history from './history';
 import { Router, Route, Switch } from 'react-router-dom';
 
 // pages
-import Home from './pages/Home';
-import Example from './pages/Example';
-import NotFound from './pages/NotFound';
+const Home = React.lazy(() =>
+  import('./pages/Home')
+);
+const Example = React.lazy(() =>
+  import('./pages/Example')
+);
+const NotFound = React.lazy(() =>
+  import('./pages/NotFound')
+);
+
+// containers
+const Navigation = React.lazy(() =>
+  import('../containers/Navigation')
+);
+const Footer = React.lazy(() =>
+  import('../containers/Footer')
+);
 
 
 const Main = () => {
   return (
-    <Router history={history}>
+    <Suspense fallback={<h1>LOADING</h1>}>
 
-      {/* <Sidebar /> */}
+      <Router history={history}>
 
-      <main>
-        <div className="container">
+        <Navigation />
+
+        <div className="views-container">
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/example" component={Example} />
@@ -24,11 +39,11 @@ const Main = () => {
             <Route component={NotFound} />
           </Switch>
         </div>
-      </main>
-      
-      {/* <Footer/> */}
+        
+        <Footer/>
 
-    </Router>
+      </Router>
+    </Suspense>
   )
 }
 
