@@ -1,14 +1,14 @@
 import React, { Suspense } from 'react';
 
 import history from './history';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Redirect, Switch } from 'react-router-dom';
 
 // pages
 const Home = React.lazy(() =>
   import('./pages/Home')
 );
-const Example = React.lazy(() =>
-  import('./pages/Example')
+const Category = React.lazy(() =>
+  import('./pages/Articles/Category')
 );
 const NotFound = React.lazy(() =>
   import('./pages/NotFound')
@@ -34,8 +34,9 @@ const Main = ( { toggleTheme }) => {
         <div className="views-container">
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/example" component={Example} />
-
+            <Route exact path="/articles/:category" component={Category} />
+            <Redirect from="/articles" to="/articles/all" />
+            
             <Route component={NotFound} />
           </Switch>
         </div>
