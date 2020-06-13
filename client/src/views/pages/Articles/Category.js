@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { Wrapper } from './CategoryCSS';
 
 const Category = (props) => {
+  const cat = props.match.params.category;
 
-  console.log(props);
   return (
-    <div>
-      Showing Category dynamic route, eg. /programming or /all
-    </div>
+    <Wrapper className="page">
+      <h1>Showing {cat.toUpperCase()} dynamic route</h1>
+    </Wrapper>
   )
 }
 

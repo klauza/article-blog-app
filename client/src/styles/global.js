@@ -21,10 +21,11 @@ export default createGlobalStyle`
 
   
   .views-container{
-    margin: 0 auto;
-    width: 100%;
     position: relative;
     left: 0px;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 auto;
     @media ${props => props.theme.device.tablet} {
       padding: 0px;
     }
@@ -35,4 +36,25 @@ export default createGlobalStyle`
 
   }
 
+  .page{
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+  }
+  
+  // enter 300ms, exit 150ms
+  .fade-appear, .fade-enter{
+    opacity: 1; 
+    z-index: 1;
+  }
+  .fade-appear-active, .fade-enter.fade-enter-active{
+    opacity: 1;
+    transition: opacity 300ms linear 150ms;
+  }
+  .fade-exit{
+    opacity: 1;
+  }
+  .fade-exit.fade-exit-active{
+    opacity: 0;
+    transition: opacity 150ms linear;
+  }
 `;
