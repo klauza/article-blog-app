@@ -32,7 +32,7 @@ import NotFound from './pages/NotFound';
 // );
 import Navigation from '../containers/Navigation';
 import Footer from '../containers/Footer';
-
+import ContactForm from '../containers/ContactForm';
 
 
 const Main = ( { toggleTheme }) => {
@@ -53,30 +53,32 @@ const Main = ( { toggleTheme }) => {
 
         <Route render={({ location }) => (
           <div className="views-container">
-          <TransitionGroup className="TG">
-            <CSSTransition
-              key={location.key} 
-              timeout={300}
-              // timeout={{enter: 800, exit: 400}}
-              classNames="fade" 
-              // mountOnEnter={false}
-              // unmountOnExit={true}
-            >
-              <div>
-                <Switch location={location}>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/articles/:category" component={Category} />
-                  <Redirect from="/articles" to="/articles/all" />
-                  <Route component={NotFound} />
-                </Switch>
-              </div>
-            </CSSTransition>
-          </TransitionGroup>
+            <TransitionGroup className="TG">
+              <CSSTransition
+                key={location.key} 
+                timeout={300}
+                // timeout={{enter: 800, exit: 400}}
+                classNames="fade" 
+                // mountOnEnter={false}
+                // unmountOnExit={true}
+              >
+                
+                <div>
+                  <Switch location={location}>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/articles/:category" component={Category} />
+                    <Redirect from="/articles" to="/articles/all" />
+                    <Route component={NotFound} />
+                  </Switch>
+                </div>
+
+              </CSSTransition>
+            </TransitionGroup>
           </div>
         )}/>
 
       
-        
+        <ContactForm />
         <Footer/>
       </Router>
     // </Suspense>
