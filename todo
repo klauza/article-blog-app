@@ -1,1 +1,7 @@
 @client
+ - Home featured articles - add 3d hover effect
+ - intersection observer for propagated articles & Home
+ - react-transition-grp for navigation's articles
+
+@server
+ - refactor mail & captcha into different components
