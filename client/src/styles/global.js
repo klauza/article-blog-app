@@ -13,17 +13,26 @@ export default createGlobalStyle`
     color: ${props => props.theme.colors.text};
     font-family: Verdana sans-serif;
   }
+  body, html, #root{
+    width: 100%; height: 100%;
+    overflow-x: hidden;
+  }
   
-  .container{
-    margin: 0 auto;
 
-    @media ${props => props.theme.device.laptop} {
-      max-width: 800px;
-    }
   
-    @media ${props => props.theme.device.laptopL} {
-      max-width: 1400px;
+  .views-container{
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    left: 0px;
+    @media ${props => props.theme.device.tablet} {
+      padding: 0px;
     }
+    @media ${props => props.theme.device.laptop} {
+      left: 100px;
+      transform: translate(-50px);
+    }
+
   }
 
 `;
