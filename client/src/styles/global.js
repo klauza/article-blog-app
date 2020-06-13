@@ -13,17 +13,48 @@ export default createGlobalStyle`
     color: ${props => props.theme.colors.text};
     font-family: Verdana sans-serif;
   }
+  body, html, #root{
+    width: 100%; height: 100%;
+    overflow-x: hidden;
+  }
   
-  .container{
-    margin: 0 auto;
 
-    @media ${props => props.theme.device.laptop} {
-      max-width: 800px;
-    }
   
-    @media ${props => props.theme.device.laptopL} {
-      max-width: 1400px;
+  .views-container{
+    position: relative;
+    left: 0px;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+    @media ${props => props.theme.device.tablet} {
+      padding: 0px;
     }
+    @media ${props => props.theme.device.laptop} {
+      left: 100px;
+      transform: translate(-50px);
+    }
+
   }
 
+  .page{
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+  }
+  
+  // enter 300ms, exit 150ms
+  .fade-appear, .fade-enter{
+    opacity: 1; 
+    z-index: 1;
+  }
+  .fade-appear-active, .fade-enter.fade-enter-active{
+    opacity: 1;
+    transition: opacity 300ms linear 150ms;
+  }
+  .fade-exit{
+    opacity: 1;
+  }
+  .fade-exit.fade-exit-active{
+    opacity: 0;
+    transition: opacity 150ms linear;
+  }
 `;
