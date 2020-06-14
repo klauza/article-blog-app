@@ -5,19 +5,18 @@ const Newsletter = () => {
 
   const [open, setOpen] = useState(false);
   const [credentials, setCredentials] = useState({
-    name: '',
-    email: ''
+    sub_name: '',
+    sub_email: ''
   });
 
 
   const handleSubmit = () => {
     // need to check if NOT already subscribed
     
-    alert(`${credentials.name}, your email (${credentials.email}) has been added to the subscription list!`);
+    alert(`${credentials.sub_name}, your email (${credentials.sub_email}) has been added to the subscription list!`);
   }
 
   const handleInput = (e) => {
-
     setCredentials({
       ...credentials,
       [e.target.id]: e.target.value,
@@ -42,10 +41,10 @@ const Newsletter = () => {
         <div className={`inner ${open && 'inner-open'}`}>
           <div className="inner-left">
             <h1>Newsletter</h1>
-            <label htmlFor="name">Name</label>
-            <input onChange={handleInput} type="text" id="name" />
-            <label htmlFor="email">Email</label>
-            <input onChange={handleInput} type="text" id="email" />
+            <label htmlFor="sub_name">Name</label>
+            <input onChange={handleInput} type="text" id="sub_name" />
+            <label htmlFor="sub_email">Email</label>
+            <input onChange={handleInput} type="text" id="sub_email" />
           </div>
           <div className="inner-right">
             <button onClick={handleSubmit}>Send</button>
