@@ -9,36 +9,20 @@ import { Wrapper } from './BreadcrumbCSS';
 const Breadcrumb = ({ path }) => {
 
   const [thePath, setThePath] = useState([]);
-  
-  // delete first slash
-  let paths = path
-  // .substr(1);
 
   let pathsTxt = path.substr(1).split("/");
-  pathsTxt.unshift(<HomeIcon/>);  // add at the beginning for HOME icon
-  // console.log(pathsTxt);
+  pathsTxt.unshift(<HomeIcon/>); // add at HOME svg as first tab element
 
-  // add '/' at the end
-  var pathWithSlash = paths.concat("/");
-  // console.log(pathWithSlash)
+  let pathWithEndSlash = path.concat("/"); // add '/' at the end
   
-  // let array = [];
   React.useEffect(()=>{
-
-    for(let i=0; i < pathWithSlash.length; i++){ // length = 28
-      // console.log(paths.charAt(i)); // listing all the letters
-      if(pathWithSlash.charAt(i) === "/"){
-        // array.push(pathWithSlash.slice(0, i))
-        setThePath(oldArr => [...oldArr, pathWithSlash.slice(0, i)]);
+    for(let i=0; i < pathWithEndSlash.length; i++){ 
+      if(pathWithEndSlash.charAt(i) === "/"){ // loop through every char
+        // push each location, eg: "/articles/programming"
+        setThePath(oldArr => [...oldArr, pathWithEndSlash.slice(0, i)]);
       }
     }
-
-    
-
   }, [])
-
-  console.log(thePath);
-  // let pathsb = paths.forEach((p)=>console.log(`${p}`))
 
   return (
     <Wrapper>
