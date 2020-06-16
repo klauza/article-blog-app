@@ -3,6 +3,10 @@ import React from 'react';
 // SEO
 import { Helmet } from 'react-helmet';
 
+// content
+import FeaturedArticles from './FeaturedArticles';
+import Newsletter from '../../../containers/Newsletter';
+
 // css
 import { Wrapper } from './HomeCSS';
 
@@ -10,6 +14,7 @@ const Home = () => {
   return (
     <>
       <Helmet>
+        <title>Home</title>
         <meta name="description" content="Welcome to blog's home page" />
         <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <link rel="canonical" href={window.location.href} />
@@ -30,6 +35,8 @@ const Home = () => {
 
       <Wrapper className="page">
         <span>home page</span>
+        <FeaturedArticles />
+        <Newsletter />
       </Wrapper>
     </>
   )
