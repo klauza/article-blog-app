@@ -6,7 +6,7 @@ import { HomeIcon } from '../../media/Icons';
 // css
 import { Wrapper } from './BreadcrumbCSS';
 
-const Breadcrumb = ({ path }) => {
+const Breadcrumb = ({ path, className }) => {
 
   const [thePath, setThePath] = useState([]);
 
@@ -25,7 +25,7 @@ const Breadcrumb = ({ path }) => {
   }, [])
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {thePath.length > 0 && pathsTxt.map((link, i)=>(
         <div key={i}>
           <Link to={`${thePath[i]}`}>{link}</Link>

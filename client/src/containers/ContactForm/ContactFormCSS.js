@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   font-family: 'Lato', sans-serif;
   box-shadow: 0 0 5px 0 rgba(0,0,0,.9);
   width: 100%;
-
+  position: relative;
   .header{
     text-align: center;
     padding-bottom: 25px;

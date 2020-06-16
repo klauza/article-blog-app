@@ -12,6 +12,7 @@ export default createGlobalStyle`
     font-size: 14px;
     color: ${props => props.theme.colors.text};
     font-family: Verdana sans-serif;
+    transition: color .5s ease;
   }
   body, html, #root{
     width: 100%; height: 100%;
@@ -30,8 +31,9 @@ export default createGlobalStyle`
       padding: 0px;
     }
     @media ${props => props.theme.device.laptop} {
-      left: 100px;
-      transform: translate(-50px);
+      left: 50px;
+      transform: translate(-25px);
+      width: calc(100% - 50px);
     }
 
   }

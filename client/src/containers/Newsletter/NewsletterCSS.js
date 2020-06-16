@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+  position: relative;
   background: #dcf5ff;
   margin: 0;
   height: 100vh;
@@ -14,7 +15,7 @@ export const Wrapper = styled.div`
     background: #fff;
     border-radius: 10px;
     border: 1px solid black;
-    min-height: 150px;
+    min-height: 190px;
 
     position: relative;
     
@@ -83,6 +84,7 @@ export const Wrapper = styled.div`
   @media ${props => props.theme.device.tablet}{
     .container{
       width: 50%;
+      min-height: 150px;
       .outer, .inner{
         flex-direction: row;
         align-items: center;
