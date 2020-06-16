@@ -16,8 +16,9 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 // const NotFound = React.lazy(() =>
 //   import('./pages/NotFound')
 // );
-import Home from './pages/Home'
+import Home from './pages/Home';
 import Category from './pages/Articles/Category';
+import Article from './pages/Article';
 
 import NotFound from './pages/NotFound';
 
@@ -66,8 +67,9 @@ const Main = ( { toggleTheme }) => {
                 <div>
                   <Switch location={location}>
                     <Route exact path="/" component={Home} />
+                    <Redirect exact from="/articles" to="/articles/all" />
                     <Route exact path="/articles/:category" component={Category} />
-                    <Redirect from="/articles" to="/articles/all" />
+                    <Route exact path="/articles/:category/:article" component={Article} />
                     <Route component={NotFound} />
                   </Switch>
                 </div>
@@ -78,8 +80,8 @@ const Main = ( { toggleTheme }) => {
         )}/>
 
       
-        <ContactForm />
-        <Footer/>
+        {/* <ContactForm /> */}
+        {/* <Footer/> */}
       </Router>
     // </Suspense>
   )
