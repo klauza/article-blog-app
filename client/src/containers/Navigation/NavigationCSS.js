@@ -8,10 +8,24 @@ export const Wrapper = styled.div`
 
   width: 100%; height: 50px;
   background: #d4d4d4;
+  display: flex; flex-direction: column;
 
+  // .progress-container{
+  //   height: 5px; width: 100%;
+  //   background: red;
+  //   order: 1;
+
+  //   .progress-bar {
+  //     height: 100%;
+  //     background: #4caf50;
+  //     width: 0%;
+  //   }
+
+  // }
 
 
   .nav-container{
+    order: 2;
     display: flex; flex-direction: row;
     justify-content: center;
     width: 100%;
@@ -64,8 +78,22 @@ export const Wrapper = styled.div`
     width: 50px; height: 100%;
     left: 0;
     top: 0; bottom: 0;
+    flex-direction: row;
+
+    // .progress-container{
+    //   height: 100%; width: 5px;
+    //   background: red;
+    //   order: 2;
+
+    //   .progress-bar {
+    //     height: 0%;
+    //     background: #4caf50;
+    //     width: 100%;
+    //   }
+    // }
 
     .nav-container{
+      order: 1;
       flex-direction: column;
       justify-items: center;
       align-items: center;
@@ -81,5 +109,21 @@ export const Wrapper = styled.div`
       }
     }
   
+  }
+`;
+
+export const ProgressIndicator = styled.div`
+  &.progress-container{
+    height: ${props => props.isMobile ? "5px" : "100%"}; 
+    width: ${props => props.isMobile ? "100%" : "5px"};
+    background: red;
+    order: ${props => props.isMobile ? "1" : "2"};
+
+    .progress-bar {
+      background: #4caf50;
+      height: ${props => props.height};
+      width: ${props => props.width};
+    }
+
   }
 `;
