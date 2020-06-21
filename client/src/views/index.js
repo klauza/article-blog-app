@@ -17,8 +17,9 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 //   import('./pages/NotFound')
 // );
 import Home from './pages/Home';
-import Category from './pages/Articles/Category';
+import Category from './pages/Categories';
 import Article from './pages/Article';
+import About from './pages/About';
 
 import NotFound from './pages/NotFound';
 
@@ -70,6 +71,7 @@ const Main = ( { toggleTheme }) => {
                     <Redirect exact from="/articles" to="/articles/all" />
                     <Route exact path="/articles/:category" component={Category} />
                     <Route exact path="/articles/:category/:article" component={Article} />
+                    <Route exact path="/about" component={About} />
                     <Route component={NotFound} />
                   </Switch>
                 </div>
