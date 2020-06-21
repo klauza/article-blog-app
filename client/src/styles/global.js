@@ -11,12 +11,19 @@ export default createGlobalStyle`
     background: ${props => props.theme.colors.background};
     font-size: 14px;
     color: ${props => props.theme.colors.text};
-    font-family: Verdana sans-serif;
+    font-family: 'Titillium Web', sans-serif;
     transition: color .5s ease;
   }
-  body, html, #root{
+  html{
+    // height: 100%;
+  }
+  body, #root{
     width: 100%; height: 100%;
-    overflow-x: hidden;
+    // overflow-x: hidden;
+  }
+  body{
+    // height: 100vh;
+    overflow-y: scroll;
   }
   
 

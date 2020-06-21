@@ -4,11 +4,13 @@ export const Wrapper = styled.div`
   position: relative;
   background: #dcf5ff;
   margin: 0;
-  height: 100vh;
+  height: 100%;
   display: grid;
   justify-items: center;
   align-items: center;
   font-family: Verdana;
+  border: 5px dashed black;
+
 
   .container{
     width: 80%;
