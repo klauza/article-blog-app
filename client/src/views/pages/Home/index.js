@@ -6,6 +6,9 @@ import { Helmet } from 'react-helmet';
 // content
 import FeaturedArticles from './FeaturedArticles';
 import Newsletter from '../../../containers/Newsletter';
+import Hero from './Hero';
+import ContactForm from '../../../containers/ContactForm';
+
 
 // css
 import { Wrapper } from './HomeCSS';
@@ -34,9 +37,10 @@ const Home = () => {
       </Helmet>
 
       <Wrapper className="page">
-        <span>home page</span>
+        <Hero />
         <FeaturedArticles />
         <Newsletter />
+        <ContactForm />
       </Wrapper>
     </>
   )

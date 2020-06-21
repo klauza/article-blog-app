@@ -1,6 +1,9 @@
 import React, { Suspense } from 'react';
 import { NavLink } from 'react-router-dom';
+
 import f_articles from '../../../data/featuredArticles';
+
+import BigHeader from '../../../containers/BigHeader';
 
 // css
 import { FeaturedArticlesContainer } from './HomeCSS';
@@ -8,7 +11,7 @@ import { FeaturedArticlesContainer } from './HomeCSS';
 const FeaturedArticles = () => {
   return (
     <FeaturedArticlesContainer>
-      <h1>Featured articles</h1>
+      <BigHeader text={"FEATURED ARTICLES"}/>
 
         
       <div className="container">
