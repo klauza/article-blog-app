@@ -1,4 +1,6 @@
 import React from 'react';
+import FetchUrl from '../../../utils/FetchUrl';
+import { NavLink } from 'react-router-dom';
 
 // SEO
 import { Helmet } from 'react-helmet';
@@ -6,11 +8,18 @@ import { Helmet } from 'react-helmet';
 // breadcrumb
 import Breadcrumb from '../../../containers/Breadcrumb';
 
-//css
-import { Wrapper } from './CategoryCSS';
+// css, media
+import { Card, Wrapper } from './CategoryCSS';
+import {cookingCategory} from '../../../media/Images';
+
 
 const Category = (props) => {
   const cat = props.match.params.category;
+
+  const { data, loading, error } = FetchUrl(`http://localhost:1337/categories?name=${cat}`) || null;
+
+  if(data) console.log(data[0].articles)
+  
 
   return (
     <>
@@ -35,8 +44,27 @@ const Category = (props) => {
       </Helmet>
 
       <Wrapper className="page">
+        <div className="top-image">
+          <img src={cookingCategory} alt="" />
+        </div>
         <h1>Showing {cat.toUpperCase()} dynamic route</h1>
         <Breadcrumb path={window.location.pathname} />
+
+        <div className="category-content">
+
+        {data !== null 
+          ? data[0].articles.map((article, i) => 
+            <Card key={i} bg={`url(http://localhost:1337${article.title_image.formats.thumbnail.url})`}>
+              <NavLink to={`/articles/${cat}/${article.slug}`} >
+                <h3>{article.title}</h3>
+
+              </NavLink>
+            </Card>
+            )
+
+          : <div>Fetching data...</div>}
+      </div>
+      
       </Wrapper>
     </>
   )
