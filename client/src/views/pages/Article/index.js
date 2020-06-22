@@ -1,5 +1,6 @@
 import React from 'react';
 import FetchUrl from '../../../utils/FetchUrl';
+import { Link } from 'react-router-dom';
 
 // SEO
 import { Helmet } from 'react-helmet';
@@ -63,7 +64,7 @@ const Article = (props) => {
           </div>
 
           <div className="date-section">
-            <span>[ {artcl.added} ]</span>
+            <div className="left-grid"><span>in {data !== null && <Link to={`/articles/${data[0].primary_category}`}>{data[0].primary_category}</Link>}</span><span>[ {artcl.added} ]</span></div>
             <div/>
           </div>
 

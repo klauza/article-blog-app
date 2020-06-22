@@ -64,9 +64,17 @@ export const Wrapper = styled.div`
       grid-template-columns: 3fr 1fr;
       grid-gap: 20px;
       margin-bottom: 25px;
+  
+      .left-grid{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
 
+        a{
+          color: #fff;
+        }
+      }
       span{
-        text-align: right;
         color: #fff;
         // background: #000;
       }
