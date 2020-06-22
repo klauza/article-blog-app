@@ -58,6 +58,9 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "primary_category": {
+      "type": "string"
     }
   }
 }
