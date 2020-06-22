@@ -1,4 +1,5 @@
 import React from 'react';
+import FetchUrl from '../../../utils/FetchUrl';
 
 // SEO
 import { Helmet } from 'react-helmet';
@@ -15,7 +16,13 @@ import cookingArticles from '../../../data/getCookingArticles';
 
 const artcl = cookingArticles[0];
 
-const Article = () => {
+const Article = (props) => {
+
+  const art = props.match.params.article;
+
+  const { data, loading, error } = FetchUrl(`http://localhost:1337/articles?slug=${art}`) || null;
+
+  if(data) console.log(data[0])
 
   return (
     <>
@@ -63,8 +70,20 @@ const Article = () => {
           <div className="container-grid__bot">
 
             <div className="content">
-              <h1>Article Title</h1>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, officiis!</p>
+              {data !== null 
+              ? 
+                <div >
+                    <h3>{data[0].title}</h3>
+                    <section
+                      dangerouslySetInnerHTML={{__html: data[0].content}}>
+                      
+                    </section>
+                </div>
+              
+
+              : <div>Fetching data...</div>
+              }
+
             </div>
             <div className="add-block">ADS</div>
           </div>
