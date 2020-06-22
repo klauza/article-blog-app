@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import FetchUrl from '../../../utils/FetchUrl';
 import { NavLink } from 'react-router-dom';
 import history from '../../history';
@@ -13,11 +13,46 @@ import Breadcrumb from '../../../containers/Breadcrumb';
 import { Card, Wrapper } from './CategoryCSS';
 import {cookingCategory} from '../../../media/Images';
 
+// query search functions
+import getQuery from './getQuery';
 
 const Category = (props) => {
   const cat = props.match.params.category;
 
+
   // FILTERING
+  // query
+  const [query, setQuery] = useState(getQuery(history.location));
+
+  useEffect(()=>{
+    // getQuery(history.location);
+  }, [])
+
+  const handleChange = (e) => {
+    var val = e.target.value.trim();
+    setQuery(val);
+    // updateURL();
+    setParams(val);
+
+    setTimeout(()=>{
+      updateURL(val);
+    }, 1000)
+
+  }
+
+  function setParams(val) {
+    const searchParams = new URLSearchParams();
+    searchParams.set("search", val);
+    return searchParams.toString().toLowerCase();
+  }
+
+  const updateURL = (val) => {
+    const url = setParams();
+    // props.history.push(`?cat=${params.cat}&${url}`);
+    props.history.push(`?search=${val}`);
+  };
+
+  // category
   const [filter, setFilter] = useState([]);
 
   const handleFilter = (e) => {
@@ -26,7 +61,7 @@ const Category = (props) => {
     history.push(`/articles/${e.target.id}`)
   }
   const deleteFilter = () => {
-    
+   
   }
   // 
 
@@ -34,14 +69,18 @@ const Category = (props) => {
     var { data, loading, error } = FetchUrl(`http://localhost:1337/categories?name=${cat}`);
 
     if((data !== null && data.length > 0) && (!error)) data = data[0].articles
-    console.log(data)
+    // console.log(data)
   } else if(cat === 'all'){
     var { data, loading, error } = FetchUrl(`http://localhost:1337/articles`) || null;
-    if(data) console.log(data)
+    // if(data) console.log(data)
   }
 
-  
 
+
+
+
+  
+  console.log('query: ',query);
   return (
     <>
       <Helmet>
@@ -71,16 +110,23 @@ const Category = (props) => {
         <h1>Showing {cat.toUpperCase()} dynamic route</h1>
         <Breadcrumb path={window.location.pathname} />
 
-        <div className="filter-block">
+        {/* category filter */}
+        <div className="filter-category">
           <h4>Filter</h4>
           <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap"}}>
             <div id="all" className={`filter-element ${cat === "all" && 'selected'}`} onClick={handleFilter}>All</div>
             <div id="programming" className={`filter-element ${cat === "programming" && 'selected'}`} onClick={handleFilter}>Programming</div>
             <div id="hobby" className={`filter-element ${cat === "hobby" && 'selected'}`} onClick={handleFilter}>Hobby</div>
-            <div id="education" className="filter-element" onClick={handleFilter}>Education</div>
+            <div id="photography" className={`filter-element ${cat === "photography" && 'selected'}`} onClick={handleFilter}>Photography</div>
           </div>
         </div>
 
+        {/* query search filter */}
+        <div className="filter-query">
+          <label htmlFor="q_search">query search: </label><input autoComplete="off" id="q_search" value={query} onChange={handleChange} /> 
+        </div>
+
+        {/* article cards */}
         <div className="category-content">
         {data 
           ? data.map((article, i) => 
@@ -93,7 +139,7 @@ const Category = (props) => {
             )
 
           : <div>Fetching data...</div>}
-          
+
           {error && <div>{error}</div>}
       </div>
       
