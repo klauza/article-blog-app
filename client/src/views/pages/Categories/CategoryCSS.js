@@ -18,6 +18,32 @@ export const Wrapper = styled.div`
     text-align: center;
   }
 
+  .filter-block{
+    width: 70%;
+    margin: 0 auto;
+
+
+    .filter-element{
+      margin: 0 2.5px;
+      padding: 2.5px 5px;
+      border: 1px solid black;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      &:hover{
+        transition: all 0.3s ease;
+        background: #fff;
+        color: #000;
+      }
+    }
+
+    .selected{
+      background: #fff;
+      color: #000;
+    }
+  }
+
 
   .category-content{
     display: flex; flex-direction: row;

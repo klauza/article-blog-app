@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import FetchUrl from '../../../utils/FetchUrl';
 import { NavLink } from 'react-router-dom';
+import history from '../../history';
 
 // SEO
 import { Helmet } from 'react-helmet';
@@ -16,9 +17,28 @@ import {cookingCategory} from '../../../media/Images';
 const Category = (props) => {
   const cat = props.match.params.category;
 
-  const { data, loading, error } = FetchUrl(`http://localhost:1337/categories?name=${cat}`) || null;
+  const [filter, setFilter] = useState([]);
 
-  if(data) console.log(data[0].articles)
+  const handleFilter = (e) => {
+    if(cat === e.target.id) return
+    console.log(e.target.id)
+    history.push(`/articles/${e.target.id}`)
+  }
+  const deleteFilter = () => {
+    
+  }
+
+
+  if(cat !== 'all'){
+    var { data, loading, error } = FetchUrl(`http://localhost:1337/categories?name=${cat}`);
+    if (error) console.log(error)
+    if((data !== null && data.length > 0) && (!error)) data = data[0].articles
+    console.log(data)
+  } else if(cat === 'all'){
+    var { data, loading, error } = FetchUrl(`http://localhost:1337/articles`) || null;
+    if(data) console.log(data)
+  }
+
   
 
   return (
@@ -50,10 +70,19 @@ const Category = (props) => {
         <h1>Showing {cat.toUpperCase()} dynamic route</h1>
         <Breadcrumb path={window.location.pathname} />
 
-        <div className="category-content">
+        <div className="filter-block">
+          <h4>Filter</h4>
+          <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap"}}>
+            <div id="all" className={`filter-element ${cat === "all" && 'selected'}`} onClick={handleFilter}>All</div>
+            <div id="programming" className={`filter-element ${cat === "programming" && 'selected'}`} onClick={handleFilter}>Programming</div>
+            <div id="hobby" className={`filter-element ${cat === "hobby" && 'selected'}`} onClick={handleFilter}>Hobby</div>
+            <div id="education" className="filter-element" onClick={handleFilter}>Education</div>
+          </div>
+        </div>
 
-        {data !== null 
-          ? data[0].articles.map((article, i) => 
+        <div className="category-content">
+        {data 
+          ? data.map((article, i) => 
             <Card key={i} bg={`url(http://localhost:1337${article.title_image.formats.thumbnail.url})`}>
               <NavLink to={`/articles/${cat}/${article.slug}`} >
                 <h3>{article.title}</h3>
