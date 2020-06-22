@@ -14,10 +14,14 @@ function FetchUrl(url, options){
       try{
         const response = await fetch(url, options);
         const data = await response.json();
+        if(data.length === 0){
+          setError('No articles')
+        }
         if (!signal.aborted) {
           setData(data); // TO SAMO: const [item] = data.results
         }
       } catch(e){
+        console.log(e)
         if (!signal.aborted) {
           setError(e);
         }
@@ -31,14 +35,13 @@ function FetchUrl(url, options){
     }
     fetchData(url);
 
-
-    // setData(fetchData(url));
     return () => {
       abortController.abort();
       console.log('fetch aborted');
     }
   }, [])
 
+  console.log({ data, loading, error })
   return { data, loading, error }
 
 }

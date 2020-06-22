@@ -17,6 +17,7 @@ import {cookingCategory} from '../../../media/Images';
 const Category = (props) => {
   const cat = props.match.params.category;
 
+  // FILTERING
   const [filter, setFilter] = useState([]);
 
   const handleFilter = (e) => {
@@ -27,11 +28,11 @@ const Category = (props) => {
   const deleteFilter = () => {
     
   }
-
+  // 
 
   if(cat !== 'all'){
     var { data, loading, error } = FetchUrl(`http://localhost:1337/categories?name=${cat}`);
-    if (error) console.log(error)
+
     if((data !== null && data.length > 0) && (!error)) data = data[0].articles
     console.log(data)
   } else if(cat === 'all'){
@@ -92,6 +93,8 @@ const Category = (props) => {
             )
 
           : <div>Fetching data...</div>}
+          
+          {error && <div>{error}</div>}
       </div>
       
       </Wrapper>
