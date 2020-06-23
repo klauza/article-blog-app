@@ -11,33 +11,37 @@ import Breadcrumb from '../../../containers/Breadcrumb';
 
 // css, media
 import { Card, Wrapper } from './CategoryCSS';
-import {cookingCategory} from '../../../media/Images';
+import { cookingCategory } from '../../../media/Images';
 
 // query search functions
 import getQuery from './getQuery';
 
+var timer = 0; // set initial value of url-update process
+
 const Category = (props) => {
   const cat = props.match.params.category;
-
 
   // FILTERING
   // query
   const [query, setQuery] = useState(getQuery(history.location));
 
-  useEffect(()=>{
-    // getQuery(history.location);
-  }, [])
+  // useEffect(()=>{
+  //   getQuery(history.location);
+  // }, [])
 
   const handleChange = (e) => {
+
+    // cancel url-update if process already scheduled
+    if (timer) {
+      clearTimeout(timer);
+      timer = 0;
+    }
+
     var val = e.target.value.trim();
     setQuery(val);
-    // updateURL();
     setParams(val);
 
-    setTimeout(()=>{
-      updateURL(val);
-    }, 1000)
-
+    timer = setTimeout(()=>{ updateURL(val); }, 1500);
   }
 
   function setParams(val) {
@@ -76,10 +80,6 @@ const Category = (props) => {
   }
 
 
-
-
-
-  
   console.log('query: ',query);
   return (
     <>
@@ -123,7 +123,7 @@ const Category = (props) => {
 
         {/* query search filter */}
         <div className="filter-query">
-          <label htmlFor="q_search">query search: </label><input autoComplete="off" id="q_search" value={query} onChange={handleChange} /> 
+          <label>query search: </label><input autoComplete="off" id="q_search" value={query} onChange={handleChange} /> 
         </div>
 
         {/* article cards */}
