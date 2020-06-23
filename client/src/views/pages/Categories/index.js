@@ -15,8 +15,11 @@ import { cookingCategory } from '../../../media/Images';
 
 // query search functions
 import getQuery from './getQuery';
+import FilterQry from './FilterQry';
 
 var timer = 0; // set initial value of url-update process
+var interval = 0;
+var width = 0;
 
 const Category = (props) => {
   const cat = props.match.params.category;
@@ -25,6 +28,7 @@ const Category = (props) => {
   // query
   const [query, setQuery] = useState(getQuery(history.location));
 
+  const [w, setW] = useState(0);
   // useEffect(()=>{
   //   getQuery(history.location);
   // }, [])
@@ -35,13 +39,22 @@ const Category = (props) => {
     if (timer) {
       clearTimeout(timer);
       timer = 0;
+      clearInterval(interval);
+      interval = 0;
+      width = 0;
     }
 
     var val = e.target.value.trim();
     setQuery(val);
     setParams(val);
 
-    timer = setTimeout(()=>{ updateURL(val); }, 1500);
+    // it does not stop :((
+    interval = setInterval(()=>{
+      setW(width+=10);
+      console.log(width)
+    }, 100);
+    
+    timer = setTimeout(()=>{ updateURL(val); clearInterval(interval); }, 1000);
   }
 
   function setParams(val) {
@@ -51,9 +64,12 @@ const Category = (props) => {
   }
 
   const updateURL = (val) => {
-    const url = setParams();
-    // props.history.push(`?cat=${params.cat}&${url}`);
-    props.history.push(`?search=${val}`);
+    // const url = setParams();
+    if(val === ''){
+      props.history.push(history.location.pathname);
+    } else{
+      props.history.push(`?search=${val}`);
+    }
   };
 
   // category
@@ -61,7 +77,7 @@ const Category = (props) => {
 
   const handleFilter = (e) => {
     if(cat === e.target.id) return
-    console.log(e.target.id)
+    // console.log(e.target.id)
     history.push(`/articles/${e.target.id}`)
   }
   const deleteFilter = () => {
@@ -80,7 +96,7 @@ const Category = (props) => {
   }
 
 
-  console.log('query: ',query);
+  // console.log('query: ',query);
   return (
     <>
       <Helmet>
@@ -122,9 +138,7 @@ const Category = (props) => {
         </div>
 
         {/* query search filter */}
-        <div className="filter-query">
-          <label>query search: </label><input autoComplete="off" id="q_search" value={query} onChange={handleChange} /> 
-        </div>
+        <FilterQry width={w} query={query} handleChange={handleChange} />
 
         {/* article cards */}
         <div className="category-content">

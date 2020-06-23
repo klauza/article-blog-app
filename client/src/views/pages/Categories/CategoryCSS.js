@@ -18,10 +18,9 @@ export const Wrapper = styled.div`
     text-align: center;
   }
 
-  .filter-block{
+  .filter-category{
     width: 70%;
     margin: 0 auto;
-
 
     .filter-element{
       margin: 0 2.5px;
@@ -45,6 +44,8 @@ export const Wrapper = styled.div`
   }
 
 
+
+
   .category-content{
     display: flex; flex-direction: row;
   }
@@ -59,6 +60,7 @@ export const Card = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  box-shadow: 0 2px 5px -1px rgba(0,0,0,1);
 
   a{
     text-decoration: none;
@@ -70,4 +72,20 @@ export const Card = styled.div`
     color: #fff;
     background: rgba(0,0,0,.5);
   }
+`;
+
+export const FilterQuery = styled.div`
+&.filter-query{
+  margin: 0 auto;
+  width: 500px; height: auto;
+  border: 1px solid black;
+
+
+}
+.filter-query-indicator{
+  width: ${props => props.w+'px'};
+  height: 8px;
+  background: red;
+  border-radius: 1.5em;
+}
 `;
