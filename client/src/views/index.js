@@ -58,15 +58,18 @@ const Main = ( { toggleTheme }) => {
             <TransitionGroup className="TG">
               <CSSTransition
                 key={location.key} 
-                timeout={300}
+                // timeout={300}
+                // classNames="fade" 
                 // timeout={{enter: 800, exit: 400}}
-                classNames="fade" 
+                timeout={0}
                 // mountOnEnter={false}
                 // unmountOnExit={true}
               >
                 
                 <div>
-                  <Switch location={location}>
+                  <Switch 
+                  location={location}
+                  >
                     <Route exact path="/" component={Home} />
                     <Redirect exact from="/articles" to="/articles/all" />
                     <Route exact path="/articles/:category" component={Category} />
@@ -79,7 +82,7 @@ const Main = ( { toggleTheme }) => {
               </CSSTransition>
             </TransitionGroup>
           </div>
-        )}/>
+         )}/> 
 
       
         {/* <ContactForm /> */}

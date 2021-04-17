@@ -56,7 +56,7 @@ export const Card = styled.div`
   margin: 20px;
   width: 250px;
   height: 200px;
-  background: ${props => props.bg};
+  // background: ${props => props.bg};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -72,20 +72,4 @@ export const Card = styled.div`
     color: #fff;
     background: rgba(0,0,0,.5);
   }
-`;
-
-export const FilterQuery = styled.div`
-&.filter-query{
-  margin: 0 auto;
-  width: 500px; height: auto;
-  border: 1px solid black;
-
-
-}
-.filter-query-indicator{
-  width: ${props => props.w+'px'};
-  height: 8px;
-  background: red;
-  border-radius: 1.5em;
-}
 `;

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import FetchUrl from '../../../utils/FetchUrl';
 import { NavLink } from 'react-router-dom';
 import history from '../../history';
+
+// content
+import Content from './Content';
 
 // SEO
 import { Helmet } from 'react-helmet';
@@ -17,45 +19,28 @@ import { cookingCategory } from '../../../media/Images';
 import getQuery from './getQuery';
 import FilterQry from './FilterQry';
 
-var timer = 0; // set initial value of url-update process
-var interval = 0;
-var width = 0;
+
 
 const Category = (props) => {
   const cat = props.match.params.category;
+  // const [fData, setFData] = useState(null);
+  const [query, setQuery] = useState(getQuery(history.location));
+  
+
+
+  // console.log( {data, loading, error} )
+
+
+
 
   // FILTERING
   // query
-  const [query, setQuery] = useState(getQuery(history.location));
 
-  const [w, setW] = useState(0);
   // useEffect(()=>{
   //   getQuery(history.location);
   // }, [])
 
-  const handleChange = (e) => {
 
-    // cancel url-update if process already scheduled
-    if (timer) {
-      clearTimeout(timer);
-      timer = 0;
-      clearInterval(interval);
-      interval = 0;
-      width = 0;
-    }
-
-    var val = e.target.value.trim();
-    setQuery(val);
-    setParams(val);
-
-    // it does not stop :((
-    interval = setInterval(()=>{
-      setW(width+=10);
-      console.log(width)
-    }, 100);
-    
-    timer = setTimeout(()=>{ updateURL(val); clearInterval(interval); }, 1000);
-  }
 
   function setParams(val) {
     const searchParams = new URLSearchParams();
@@ -85,18 +70,12 @@ const Category = (props) => {
   }
   // 
 
-  if(cat !== 'all'){
-    var { data, loading, error } = FetchUrl(`http://localhost:1337/categories?name=${cat}`);
-
-    if((data !== null && data.length > 0) && (!error)) data = data[0].articles
-    // console.log(data)
-  } else if(cat === 'all'){
-    var { data, loading, error } = FetchUrl(`http://localhost:1337/articles`) || null;
-    // if(data) console.log(data)
-  }
 
 
-  // console.log('query: ',query);
+
+
+
+  console.log('query: ',query);
   return (
     <>
       <Helmet>
@@ -118,7 +97,7 @@ const Category = (props) => {
         <meta name="twitter:title" content="Blog - the best blog" />
         <meta name="twitter:image" content={`https://images.pexels.com/photos/34123/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`} />
       </Helmet>
-
+      
       <Wrapper className="page">
         <div className="top-image">
           <img src={cookingCategory} alt="" />
@@ -126,7 +105,7 @@ const Category = (props) => {
         <h1>Showing {cat.toUpperCase()} dynamic route</h1>
         <Breadcrumb path={window.location.pathname} />
 
-        {/* category filter */}
+        {/* category filter  */}
         <div className="filter-category">
           <h4>Filter</h4>
           <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap"}}>
@@ -138,28 +117,17 @@ const Category = (props) => {
         </div>
 
         {/* query search filter */}
-        <FilterQry width={w} query={query} handleChange={handleChange} />
+        <FilterQry setParams={setParams} setQuery={setQuery} updateURL={updateURL} query={query} />
 
         {/* article cards */}
-        <div className="category-content">
-        {data 
-          ? data.map((article, i) => 
-            <Card key={i} bg={`url(http://localhost:1337${article.title_image.formats.thumbnail.url})`}>
-              <NavLink to={`/articles/${cat}/${article.slug}`} >
-                <h3>{article.title}</h3>
+        <Content cat={cat} />
 
-              </NavLink>
-            </Card>
-            )
-
-          : <div>Fetching data...</div>}
-
-          {error && <div>{error}</div>}
-      </div>
       
       </Wrapper>
+      
+      
     </>
   )
 }
 
-export default Category
+export default React.memo(Category)

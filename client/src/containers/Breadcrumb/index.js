@@ -22,8 +22,8 @@ const Breadcrumb = ({ path, className }) => {
         setThePath(oldArr => [...oldArr, pathWithEndSlash.slice(0, i)]);
       }
     }
+    // eslint-disable-next-line
   }, [])
-
   return (
     <Wrapper className={className}>
       {thePath.length > 0 && pathsTxt.map((link, i)=>(

@@ -27,9 +27,9 @@ function FetchUrl(url, options){
         }
         
       } finally {
-        if (!signal.aborted) {
-          setLoading(false);
-        }
+        // if (!signal.aborted) {
+        //   setLoading(false);
+        // }
         
       }
     }
@@ -37,11 +37,12 @@ function FetchUrl(url, options){
 
     return () => {
       abortController.abort();
-      console.log('fetch aborted');
+      // console.log('fetch aborted');
     }
+    //eslint-disable-next-line
   }, [])
 
-  console.log({ data, loading, error })
+  // console.log({ data, loading, error })
   return { data, loading, error }
 
 }
